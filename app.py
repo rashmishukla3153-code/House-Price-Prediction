@@ -1,3 +1,4 @@
+from sklearn.ensemble import RandomForestRegressor
 import streamlit as st
 import pickle
 from sklearn.preprocessing import StandardScaler
@@ -29,7 +30,20 @@ user_X = scaler.transform([all_value])
 
 @st.cache_data
 def ml model(X,y):
-  model = 
+  model = RandomForestRegressor()
+  model.fit(X,y)
+  return model
+model = ml_model(scaled_X,y)
+house_price = model.predict(user_X)[0]
+
+final_price = round(house_price * 100000,2)
+
+with st.spinner('Predicting House Price'):
+  import time
+  time.sleep(2)
+
+st.sucess(f'Estimated House Price is: ${final_price}')
+st.markdown('''**Design & Develope by:Rashmi Shukla**''')
 
 
 
